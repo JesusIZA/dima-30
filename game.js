@@ -68,10 +68,10 @@ function rng(seed) {
 
 // ---------- Контент: епохи ----------
 function era(year) {
-  if (year <= 6) return 'kid';
-  if (year <= 17) return 'school';
-  if (year <= 22) return 'uni';
-  if (year === 23) return 'diag';
+  if (year <= 4) return 'kid';
+  if (year <= 15) return 'school';
+  if (year <= 21) return 'uni';
+  if (year <= 23) return 'diag';
   if (year === 24) return 'army';
   if (year <= 26) return 'sklad';
   return 'army';
@@ -82,6 +82,7 @@ const ERA_STYLE = {
   uni:    { sky: ['#5b8fe0', '#b8d4ff'], hillFar: '#7fa9c9', hillNear: '#4a7fa8', ground: '#5a5f7a', grass: '#7c829e', shirt: '#7b4fd1', pants: '#2f4a8a', hat: null, label: 'Універ' },
   diag:   { sky: ['#8bd0d8', '#e6fbff'], hillFar: '#b7dfe3', hillNear: '#8fc4cc', ground: '#5a5f7a', grass: '#c5ced6', shirt: '#3fa7d6', pants: '#2b5876', hat: null, label: 'Діагностичний' },
   army:   { sky: ['#a8c4b0', '#e8f0dc'], hillFar: '#8fae74', hillNear: '#5f8248', ground: '#5c4328', grass: '#6d8a3f', shirt: '#4e5f2c', pants: '#3f4d25', hat: '#3f4d25', label: 'Армія' },
+  home:   { sky: ['#9fd0ff', '#e4f3ff'], hillFar: '#9ad68c', hillNear: '#5fb45a', ground: '#7b4b2a', grass: '#52a84a', shirt: '#5a5f7a', pants: '#2b2f40', hat: null, label: 'Село' },
   sklad:  { sky: ['#b9a98a', '#f0e6d2'], hillFar: '#c9b48e', hillNear: '#a78d62', ground: '#6b5a44', grass: '#8f8f8f', shirt: '#ff8c1a', pants: '#2b2f40', hat: null, label: 'Склад' },
 };
 
@@ -104,38 +105,43 @@ const MILESTONES = {
     opts: [['Мама', 'Класика. Мама пишається і дає сил.', 'jump'],
            ['Тато', 'Тато теж пишається. Вчить бігати.', 'fast'],
            ['sudo', 'Так народжується сисадмін. Root-доступ до гравітації.', 'moon']] },
-  7: { title: '1 клас',
-    text: 'Перший дзвоник. Бантики, гладіолуси, сльози батьків. Що кладеш у портфель?',
-    opts: [['Буквар і щоденник', 'Відмінник. Але портфель важкий.', 'slow'],
+  5: { title: '1 клас у 5 років',
+    text: 'Перший дзвоник. Тобі 5, усім іншим 6-7. Бантики, гладіолуси, сльози батьків. Що кладеш у портфель?',
+    opts: [['Буквар і щоденник', 'Наймолодший відмінник. Але портфель більший за тебе.', 'slow'],
            ['Тамагочі', 'Тамагочі голодний. Біжи додому годувати!', 'fast'],
            ['Бутерброд від мами', 'Найважливіший предмет у школі. Ростеш на очах.', 'big']] },
-  11: { title: '5 клас',
-    text: 'Нові вчителі, нові кабінети, нові предмети. Який улюблений?',
+  9: { title: '5 клас',
+    text: 'Нові вчителі, нові кабінети, нові предмети. Тобі 9. Який улюблений?',
     opts: [['Інформатика', 'Пасьянс "Косинка" пройдено на 100%. Фізика тепер умовна.', 'moon'],
            ['Фізкультура', 'Вибір сильних. Норматив з бігу здано.', 'fast'],
            ['Перерва', 'Чесна відповідь. Але після перерви не розігнатись.', 'slow']] },
-  15: { title: '9 клас',
-    text: 'ДПА здано. Куди далі?',
+  13: { title: '9 клас',
+    text: 'ДПА здано у 13. Куди далі?',
     opts: [['В 10-й клас, звісно', 'Ще два роки. Витримаєш. Стрибки допоможуть.', 'jump'],
            ['В коледж', 'Ні. Сюжет каже: в 10-й клас. І тягне назад.', 'heavy'],
            ['Поки що на перерву', 'Перерва триватиме ще два роки. Повільних.', 'slow']] },
-  17: { title: 'Випускний',
-    text: 'Останній дзвоник продзвенів. Випускний вечір. План?',
+  15: { title: 'Випускний у 15',
+    text: 'Останній дзвоник продзвенів. Випускний вечір, а тобі ще нема 16. План?',
     opts: [['Танцювати до ранку', 'Ноги болять досі. Але темп набрано.', 'fast'],
            ['Зустріти світанок', 'Світанок зустрінуто. Разом з комарами. Не виспався.', 'slow'],
            ['Піти спати о 23:00', 'Ніхто не повірив. Зате виспався і стрибаєш.', 'jump']] },
-  18: { title: '1 курс',
-    text: 'Вступ на фахівця з інформаційних технологій. Перша пара з програмування. Перша програма?',
+  16: { title: '1 курс',
+    text: 'Вступ на фахівця з інформаційних технологій у Рівному. Квартира дядька. Перша пара з програмування. Перша програма?',
     opts: [['Hello, World!', 'Стандарт. Компілюється. Впевненість росте.', 'jump'],
            ['Hello, Wordl!', 'Помилка в першій же програмі. Баг у фізиці.', 'heavy'],
            ['Ctrl+C, Ctrl+V', 'Так, це теж програмування. І дуже швидке.', 'fast']] },
-  21: { title: '4 курс',
-    text: 'Курсова: сайт колекції монет на чистому HTML. За годину до захисту сторінка перестала відкриватись. Що робиш?',
+  17: { title: '2 курс. Мат аналіз',
+    text: 'Сапіліді Тамара Михайлівна підходить до парти і дивиться в твій зошит. Що там?',
+    opts: [['Інтеграли', 'Рідкісний випадок. Тамара Михайлівна здивована. Ти теж.', 'jump'],
+           ['Чистий аркуш', 'Вона бере ручку. Зараз буде слон.', 'slow'],
+           ['Слон, якого вона сама намалювала', 'Колекція слонів поповнена. Двієчник з досвідом.', 'moon']] },
+  19: { title: 'Диплом',
+    text: 'Дипломна: сайт колекції монет на чистому HTML. Керівник Каштан. За годину до захисту сторінка перестала відкриватись. Що робиш?',
     opts: [['Закоментувати половину коду', 'Сторінка відкрилась. Монет стало вдвічі менше. Легкість.', 'moon'],
-           ['Перезавантажити', 'Допомогло. Як завжди. Біжимо на захист.', 'fast'],
-           ['Додати ще одну монету', 'Викладач оцінив монету. І курсову. Ростеш.', 'big']] },
+           ['Дзвонити Каштану', 'Каштан каже: "Перезавантаж". Допомогло. Біжимо на захист.', 'fast'],
+           ['Додати ще одну монету', 'Каштан оцінив монету. Комісія оцінила диплом. Ростеш.', 'big']] },
   23: { title: 'Мед. діагностичний',
-    text: 'Сисадмін у медичному діагностичному центрі. Дзвінок з реєстратури: "У нас не працює інтернет!"',
+    text: 'Третій рік сисадміном у медичному діагностичному центрі. Дзвінок з реєстратури: "У нас не працює інтернет!"',
     opts: [['А ви пробували вимкнути і ввімкнути?', 'Запрацювало. Дзвонять знову за 10 хвилин. Бігом.', 'fast'],
            ['Перезавантажити роутер', 'Роутер 2009 року оживає втретє за день. Повільно.', 'slow'],
            ['Це не баг, це фіча', 'Реєстратура не оцінила гумор. Гравітація оцінила.', 'moon']] },
@@ -160,26 +166,26 @@ const YEAR_NOTICES = {
   1: 'Народився. 3,4 кг чистого потенціалу.',
   2: 'Перші зуби. Перша покусана мама.',
   3: 'Навчився ходити. І падати.',
-  4: 'Зʼїв пісок. Смачно.',
-  5: 'Перший велосипед. Перше розбите коліно.',
-  6: 'Перша гра на компʼютері в сусіда. Назавжди.',
-  7: 'Перший дзвоник. Бантики, гладіолуси.',
-  8: 'Навчився читати. Читає лише коди до ігор.',
-  9: 'Голова болить. Не хочу в школу.',
+  4: 'Зʼїв пісок. Смачно. Полуницю краще не треба.',
+  5: 'Перший дзвоник у 5 років. Наймолодший у класі.',
+  6: 'Навчився читати. Читає лише коди до ігор.',
+  7: 'Перший велосипед. Перше розбите коліно.',
+  8: 'Перша гра на компʼютері в сусіда. Назавжди.',
+  9: '5 клас. Десять вчителів замість одного.',
   10: 'Косинка пройдена. Сапер поки що ні.',
-  11: '5 клас. Десять вчителів замість одного.',
-  12: 'Перша двійка. Щоденник загублено.',
-  13: 'Голос ламається. Авторитет теж.',
-  14: 'Дискотека в сільському клубі. Перший повільний танець.',
-  15: 'ДПА здано. Вижив.',
-  16: 'Перша спроба відростити бороду.',
-  17: 'Випускний. ЗНО здано.',
-  18: 'Вступ на IT. Рівне, квартира дядька.',
-  19: 'Перша сесія. Перша сива волосина.',
-  20: 'Пари о 8:00. Проспав усі.',
-  21: 'Курсова: сайт колекції монет. Живий.',
-  22: 'Диплом в руках. Що далі?',
-  23: 'Сисадмін у діагностичному. Ворог: принтер.',
+  11: 'Перша двійка. Щоденник загублено.',
+  12: 'Голос ламається. Авторитет теж.',
+  13: 'ДПА здано у 13. Вижив.',
+  14: 'Дискотека в сільському клубі. Перший мідляк.',
+  15: 'Випускний. ЗНО здано у 15.',
+  16: 'Вступ на IT. Рівне, квартира дядька.',
+  17: 'Мат аналіз. Сапіліді малює слонів у зошитах.',
+  18: 'Пари о 8:00. Проспав усі.',
+  19: 'Диплом: сайт колекції монет. Керівник Каштан.',
+  20: 'Диплом бакалавра в руках. Далі магістратура, ще 1,5 року.',
+  21: 'Магістр удень, сисадмін у діагностичному ввечері.',
+  22: 'Магістра здано. Сисадміном залишився.',
+  23: 'Діагностичний. Головний ворог: принтер.',
   24: 'Строкова. Підйом о 6:00.',
   25: 'Склад. Палета №47 прибула.',
   26: 'Новий ноутбук. Ігри встановлено.',
@@ -191,13 +197,13 @@ const YEAR_NOTICES = {
 // Етапи руху за віком
 function ageMove(y) {
   if (y <= 2) return { mode: 'crawl', label: 'ПОВЗЕ', speed: 0.55, jump: 0.72 };
-  if (y <= 6) return { mode: 'walk', label: 'ІДЕ', speed: 0.8, jump: 0.95 };
-  if (y <= 13) return { mode: 'walk', label: 'ІДЕ', speed: 0.95, jump: 1 };
+  if (y <= 4) return { mode: 'walk', label: 'ІДЕ', speed: 0.8, jump: 0.95 };
+  if (y <= 11) return { mode: 'walk', label: 'ІДЕ', speed: 0.95, jump: 1 };
   return { mode: 'run', label: 'БІЖИТЬ', speed: 1.12, jump: 1 };
 }
 
 const GREETING =
-`Дімо, з 30-річчям!
+`Дімітріусе, з 30-річчям!
 
 Тридцять рівнів пройдено. Ти питав, як би Ісус зробив на твоєму місці. Відповідаю. Настанови від Ісуса:
 
@@ -229,7 +235,7 @@ const HEAD = [
 ];
 // Ростові стадії: [рядків тулуба, рядків ніг]
 const STAGES = [[2, 2], [3, 3], [3, 4], [4, 5], [4, 6]];
-function stageForYear(y) { return y <= 3 ? 0 : y <= 8 ? 1 : y <= 13 ? 2 : y <= 17 ? 3 : 4; }
+function stageForYear(y) { return y <= 3 ? 0 : y <= 6 ? 1 : y <= 11 ? 2 : y <= 15 ? 3 : 4; }
 
 function place(segs) { // segs: [[col, 'PP'], ...] -> рядок шириною 10
   const a = Array(10).fill('.');
@@ -361,6 +367,7 @@ function drawObstacle(o, t) {
       while (yy > y) { yy -= 4; ctx.fillStyle = cols[i++ % cols.length]; ctx.fillRect(x + (i % 2), yy, w - 1, 4); ctx.fillStyle = 'rgba(255,255,255,.3)'; ctx.fillRect(x + (i % 2), yy, w - 1, 1); }
       break;
     }
+    case 'home':
     case 'diag': {
       ctx.fillStyle = '#2a2e45'; ctx.fillRect(x, y, w, h);
       ctx.fillStyle = '#5a5f7a';
@@ -415,6 +422,11 @@ function drawHazard(hz, t) {
       ctx.fillStyle = Math.floor(t * 30) % 2 ? '#cfd3e6' : '#5a5f7a'; ctx.fillRect(x - 1, y, 5, 1); ctx.fillRect(x + 8, y, 5, 1);
       ctx.fillStyle = '#e04a5a'; ctx.fillRect(x + 5, y + 7, 2, 1);
       break;
+    case 'berry': // полуниця
+      ctx.fillStyle = '#52a84a'; ctx.fillRect(x + 1, y, 6, 2); ctx.fillRect(x + 3, y - 1, 2, 1);
+      ctx.fillStyle = '#e04a5a'; ctx.fillRect(x, y + 2, 8, 3); ctx.fillRect(x + 1, y + 5, 6, 2); ctx.fillRect(x + 2, y + 7, 4, 1);
+      ctx.fillStyle = '#ffd84a'; ctx.fillRect(x + 2, y + 3, 1, 1); ctx.fillRect(x + 5, y + 4, 1, 1); ctx.fillRect(x + 3, y + 6, 1, 1);
+      break;
     case 'sklad': // коробка, що котиться
       ctx.fillStyle = '#c98a4b'; ctx.fillRect(x, y, 10, 10);
       ctx.fillStyle = '#8a5a2b'; ctx.fillRect(x, y, 10, 1); ctx.fillRect(x, y + 9, 10, 1); ctx.fillRect(x, y, 1, 10); ctx.fillRect(x + 9, y, 1, 10);
@@ -424,7 +436,7 @@ function drawHazard(hz, t) {
 }
 
 // ---------- Світ ----------
-let world, player, state, time, lastT, keys, portedCount, nextToast, candlesGot, coinsGot, bumpT, effect, lastWasPorted, falls, hits, toastBusy;
+let world, player, state, time, lastT, keys, portedCount, nextToast, candlesGot, coinsGot, bumpT, effect, lastWasPorted, falls, hits, allergies, berryTouches, toastBusy;
 
 function buildWorld() {
   const r = rng(30);
@@ -436,7 +448,7 @@ function buildWorld() {
     const e = era(y);
     const hasStop = !!MILESTONES[y];
     if (hasStop) triggers.push({ x: base + 230, year: y, done: false });
-    if (y === YEARS) continue;
+    if (y === YEARS) { candles.push({ x: base + 250, y: GROUND - 40, got: false }); continue; }
 
     // Складність зростає з роками
     const diff = (y - 1) / (YEARS - 2); // 0..1
@@ -471,7 +483,18 @@ function buildWorld() {
       const range = 70 + Math.floor(r() * 60);
       let hx = base + 150 + Math.floor(r() * (SEG - 300 - range));
       if (hasStop && hx < base + 340) hx = base + 340;
-      hazards.push({ x0: hx, x1: hx + range, x: hx, y: GROUND - 16 - Math.floor(r() * 14), dir: k % 2 ? -1 : 1, speed: 50 + diff * 70, kind: e === 'kid' ? 'school' : e });
+      hazards.push({ x0: hx, x1: hx + range, x: hx, y: GROUND - 16 - Math.floor(r() * 14), dir: k % 2 ? -1 : 1, speed: 50 + diff * 70, kind: e === 'kid' ? 'school' : e === 'home' ? 'diag' : e });
+    }
+    // полуниця: алергія
+    if (y >= 3 && r() < 0.45) {
+      for (let attempt = 0; attempt < 8; attempt++) {
+        const bx = base + 100 + Math.floor(r() * (SEG - 200));
+        if (hasStop && bx > base + 180 && bx < base + 340) continue;
+        if (used.some(([a, b]) => bx + 8 > a && bx < b)) continue;
+        hazards.push({ x0: bx, x1: bx, x: bx, y: GROUND - 8, dir: 1, speed: 0, kind: 'berry' });
+        used.push([bx - 6, bx + 14]);
+        break;
+      }
     }
     // монети: над перешкодами, над ямами, і просто на шляху
     const yearObs = obstacles.filter(o => o.x >= base && o.x < base + SEG);
@@ -483,6 +506,8 @@ function buildWorld() {
       let fx = base + 80 + Math.floor(r() * (SEG - 160));
       if (hasStop && fx > base + 200 && fx < base + 330) fx += 180;
       if (coins.some(c => Math.abs(c.x - fx) < 14)) continue;
+      if (yearObs.some(o => fx + 5 > o.x - 6 && fx < o.x + o.w + 6)) continue;
+      if (yearPits.some(pt => fx + 5 > pt.x && fx < pt.x + pt.w)) continue;
       coins.push({ x: fx, y: GROUND - 10 - Math.floor(r() * 3) * 8, got: false });
     }
     let cx = base + 90 + Math.floor(r() * 460);
@@ -500,7 +525,7 @@ function reset() {
   state = 'start';
   time = 0; lastT = performance.now();
   keys = {};
-  bumpT = 0; effect = null; lastWasPorted = false; falls = 0; hits = 0;
+  bumpT = 0; effect = null; lastWasPorted = false; falls = 0; hits = 0; allergies = 0; berryTouches = 0;
   portedCount = 0; candlesGot = 0; coinsGot = 0;
   nextToast = 8 + Math.random() * 6; toastBusy = 0;
   ui.toast.classList.remove('show');
@@ -531,10 +556,11 @@ function restart() {
 
 // ---------- Сповіщення ----------
 let toastTimer = null;
-function showToast(head, text, ported) {
+function showToast(head, text, ported, warn = false) {
   ui.toast.querySelector('.toast-head').textContent = head;
   ui.toast.querySelector('.toast-text').textContent = text;
-  ui.toast.classList.toggle('alt', !ported);
+  ui.toast.classList.toggle('alt', !ported && !warn);
+  ui.toast.classList.toggle('warn', warn);
   ui.toast.classList.remove('show');
   void ui.toast.offsetWidth;
   ui.toast.classList.add('show');
@@ -642,7 +668,7 @@ function openFinale() {
   effect = null;
   sfx.win();
   drawCake();
-  const total = YEARS - 1;
+  const total = YEARS;
   let candleLine;
   if (candlesGot >= total) candleLine = `Усі ${total} свічок на торті. Ідеальне проходження!`;
   else if (candlesGot === 0) candleLine = `Свічок: 0 з ${total}. Торт без свічок. Задувати нічого, але їсти можна.`;
@@ -656,12 +682,13 @@ function openFinale() {
   else coinLine = `Монети: 0 з ${coinTotal}. Сайт колекції лишився порожнім. Як і тоді.`;
   let verdict;
   const perfect = candlesGot >= total && coinsGot >= coinTotal;
-  if (perfect && falls === 0 && hits === 0) verdict = 'Вердикт: ідеальне проходження. Навіть Ісус так не вміє.';
+  if (perfect && falls === 0 && hits === 0 && allergies === 0) verdict = 'Вердикт: ідеальне проходження. Навіть Ісус так не вміє.';
   else if (perfect) verdict = 'Вердикт: зібрано все. Пара синців не рахується.';
   else if (candlesGot >= total * 0.8 && cr >= 0.6) verdict = 'Вердикт: майже все. Для 30 років дуже пристойно.';
+  else if (allergies >= 5) verdict = 'Вердикт: дійшов, але полуницю треба обходити. Лікар попереджав.';
   else if (falls + hits >= 15) verdict = 'Вердикт: дійшов. З боями, падіннями і характером. Як у житті.';
   else verdict = 'Вердикт: головне не результат, а те, що дійшов до 30. Але можна і перепройти.';
-  ui.stats.innerHTML = `${candleLine}<br>${coinLine}<br>"Номер перенесено": ${portedCount} · падінь: ${falls} · ударів: ${hits}<br><span class="verdict">${verdict}</span>`;
+  ui.stats.innerHTML = `${candleLine}<br>${coinLine}<br>"Номер перенесено": ${portedCount} · падінь: ${falls} · ударів: ${hits} · алергій: ${allergies}<br><span class="verdict">${verdict}</span>`;
   ui.greeting.textContent = '';
   ui.btnAgain.classList.add('hidden');
   ui.finale.classList.add('visible');
@@ -752,11 +779,16 @@ function update(dt) {
 
   // рухомі небезпеки
   for (const hz of world.hazards) {
-    if (hz.x < p.x - W || hz.x > p.x + W) continue;
+    if (hz.eaten || hz.x < p.x - W || hz.x > p.x + W) continue;
     hz.x += hz.dir * hz.speed * dt;
     if (hz.x > hz.x1) { hz.x = hz.x1; hz.dir = -1; } else if (hz.x < hz.x0) { hz.x = hz.x0; hz.dir = 1; }
     if (p.stun <= 0 && p.x + PW / 2 > hz.x && p.x - PW / 2 < hz.x + 10 && p.y > hz.y && p.y - PH < hz.y + 10) {
-      hits++; sfx.hit();
+      if (hz.kind === 'berry') {
+        berryTouches++;
+        if (berryTouches === 1) { sfx.candle(); showToast('ПОЛУНИЦЯ', 'О, як смачно!', false); hz.eaten = true; continue; }
+        if (berryTouches === 2) { sfx.candle(); showToast('ПОЛУНИЦЯ', 'Файно!', false); hz.eaten = true; continue; }
+        allergies++; sfx.hit(); showToast('АЛЕРГІЯ', 'Ой, боляче! Полуниця!', false, true);
+      } else { hits++; sfx.hit(); }
       p.stun = 0.6; p.vx = -140; p.vy = -160; p.onGround = false;
     }
   }
@@ -868,7 +900,7 @@ function draw() {
   for (const o of world.obstacles) if (o.x + o.w >= camX && o.x <= camX + W) drawObstacle(o, time);
   for (const c of world.candles) if (!c.got && c.x >= camX - 10 && c.x <= camX + W) drawCandle(c.x, c.y + Math.round(Math.sin(time * 4 + c.x) * 1.5), time);
   for (const c of world.coins) if (!c.got && c.x >= camX - 10 && c.x <= camX + W) drawCoin(c.x, c.y, time);
-  for (const hz of world.hazards) if (hz.x >= camX - 20 && hz.x <= camX + W) drawHazard(hz, time);
+  for (const hz of world.hazards) if (!hz.eaten && hz.x >= camX - 20 && hz.x <= camX + W) drawHazard(hz, time);
   drawPlayer(player, st);
   ctx.restore();
 
@@ -879,7 +911,7 @@ function draw() {
   ctx.fillStyle = '#f4f0e6'; ctx.fillText(st.label.toUpperCase(), 100, 12);
   ctx.fillStyle = '#8ee7ff'; ctx.fillText(ageMove(year).label, 215, 12);
   drawCandle(W - 62, 3, time);
-  ctx.fillStyle = '#f4f0e6'; ctx.fillText(`${candlesGot}/${YEARS - 1}`, W - 54, 12);
+  ctx.fillStyle = '#f4f0e6'; ctx.fillText(`${candlesGot}/${YEARS}`, W - 54, 12);
   drawCoin(W - 118, 4, 0);
   ctx.fillStyle = '#f4f0e6'; ctx.fillText(`${coinsGot}/${world.coins.length}`, W - 110, 12);
   ctx.fillStyle = '#5a5f7a'; ctx.fillRect(282, 7, 70, 3);

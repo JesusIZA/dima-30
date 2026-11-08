@@ -171,6 +171,10 @@ button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #a2451c; }
   width: 8px; height: 8px;
   background: #ffd84a;
 }
+#toast.warn { border-color: #e04a5a; }
+#toast.warn .toast-icon { background: #e04a5a; }
+#toast.warn .toast-icon::after { background: #e04a5a; }
+#toast.warn .toast-head { color: #e04a5a; }
 #toast.alt { border-color: #8ee7ff; }
 #toast.alt .toast-icon { background: #8ee7ff; }
 #toast.alt .toast-icon::after { background: #8ee7ff; }
