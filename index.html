@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Діма: 30 рівнів</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <canvas id="game" width="480" height="270"></canvas>
+
+  <div id="start" class="overlay visible">
+    <div class="panel start-panel">
+      <h1>ДІМА: 30 РІВНІВ</h1>
+      <p class="sub">Пройди шлях від 1 до 30 року. Збери свічки і монети.</p>
+      <div class="keys">
+        <span><b>← →</b> / <b>A D</b> — біг &nbsp;·&nbsp; <b>Пробіл</b> / <b>↑</b> / <b>W</b> — стрибок</span>
+        <span><b>1 2 3</b> / <b>Enter</b> — відповіді, кожна дає ефект на два роки</span>
+      </div>
+      <button id="btn-start">НАТИСНИ ENTER, ЩОБ ПОЧАТИ</button>
+    </div>
+  </div>
+
+  <div id="dialog" class="overlay">
+    <div class="panel dialog-panel">
+      <div class="year-tag" id="dlg-year"></div>
+      <h2 id="dlg-title"></h2>
+      <p id="dlg-text"></p>
+      <div id="dlg-options"></div>
+      <p id="dlg-reply" class="reply"></p>
+      <button id="dlg-next" class="hidden">ДАЛІ [Enter]</button>
+    </div>
+  </div>
+
+  <div id="toast">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div class="toast-head">lifecell</div>
+      <div class="toast-text">Номер перенесено</div>
+    </div>
+  </div>
+
+  <div id="finale" class="overlay">
+    <div class="panel finale-panel">
+      <canvas id="cake" width="96" height="64"></canvas>
+      <h1>З 30-РІЧЧЯМ, ДІМО!</h1>
+      <div id="stats"></div>
+      <p id="greeting"></p>
+      <button id="btn-again" class="hidden">ЗІГРАТИ ЩЕ РАЗ</button>
+    </div>
+  </div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
